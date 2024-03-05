@@ -93,7 +93,8 @@ class _SectionNewsState extends State<SectionNews> {
       scrollDirection: Axis.vertical,
       itemCount: info.isNotEmpty ? info['articles'].length : 1,
       itemBuilder: (context, index) {
-        return GestureDetector(
+        return info.isNotEmpty ?
+        GestureDetector(
           onTap: () {
             // GoRouter.of(context).go('/home/reading');
             _showDetailedScreen(context, info['articles'][index]);
@@ -161,7 +162,15 @@ class _SectionNewsState extends State<SectionNews> {
               ),
             ),
           ),
-        );
+        ) :
+        const Padding(
+                padding: EdgeInsets.symmetric(vertical: 50, horizontal: 10),
+                 child: Text('No Avaliable News',
+                  style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w700,
+                      color: Colors.black54
+                  ),));
       },
     );
     return result;

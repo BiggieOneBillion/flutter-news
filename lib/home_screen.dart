@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:news_app/Testing.dart';
 import 'package:http/http.dart' as http;
 import 'package:dio/dio.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 import 'package:shimmer/shimmer.dart';
 import 'package:news_app/Home/util_function.dart';
@@ -29,6 +30,14 @@ class _HomePageState extends State<HomePage>  {
     _loadLatestNews();
   }
 
+
+  // Function to clear SharedPreferences data
+  void clearSharedPreferences(BuildContext context) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.clear();
+    print('SharedPreferences data cleared');
+    context.go('/sign-up');
+  }
 
 
   Future<void> _loadLatestNews() async {
@@ -119,14 +128,35 @@ class _HomePageState extends State<HomePage>  {
                 const SizedBox(
                   height: 50,
                 ),
-                const Padding(
+                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 0),
-                  child: Text(
-                    'RT News',
-                    style: TextStyle(
-                        color: Colors.black87,
-                        fontSize: 30,
-                        fontWeight: FontWeight.w700),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+
+                      const Text(
+                        'RT News',
+                        style: TextStyle(
+                            color: Colors.black87,
+                            fontSize: 30,
+                            fontWeight: FontWeight.w700),
+                      ),
+                      PopupMenuButton(
+                          color: Colors.black87,
+                          itemBuilder: (context)  => [
+                          PopupMenuItem
+                          (
+                            onTap:(){
+                              print('pressed!!!');
+                              clearSharedPreferences(context);
+                            },
+                            child: const Text('Log Out', style: TextStyle(color: Colors.white),)
+                                
+                        )
+                      ])
+
+
+                    ],
                   ),
                 ),
                 const SizedBox(

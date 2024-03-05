@@ -1,6 +1,8 @@
 import 'dart:convert';
+import 'package:go_router/go_router.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ReadingScreen extends StatefulWidget {
   final Map data;
@@ -17,8 +19,23 @@ class _ReadingScreenState extends State<ReadingScreen> {
   bool _isLoadingsaved = false;
   bool isSaving = false;
   String prompt = '';
+  String userId = '';
 
-  
+  @override
+  void initState() {
+    super.initState();
+    _loadSavedText();
+  }
+
+  Future<void> _loadSavedText() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    if(prefs.getString('userId') != ''){
+       setState(() {
+         userId = prefs.getString('userId') ?? '';
+       });
+    }
+  }
 
   Future <void> makePostRequest() async {
      setState(() {
@@ -37,7 +54,11 @@ class _ReadingScreenState extends State<ReadingScreen> {
            setState(() {
              prompt = 'saving..';
            });
+
+           print(userId);
+
            Map<String, dynamic> news = {
+             "user": userId,
              "author": widget.data['author'],
              "title": widget.data['title'],
              "description": widget.data['description'],
@@ -46,6 +67,8 @@ class _ReadingScreenState extends State<ReadingScreen> {
              "publishedAt": widget.data['publishedAt'],
              "content": widget.data['content'],
            };
+
+           print(news);
 
            setState(() {
              _isLoadingsaved = true;
@@ -67,7 +90,7 @@ class _ReadingScreenState extends State<ReadingScreen> {
 
            } else {
              setState(() {
-               prompt = 'Try Again!';
+               prompt = 'Not Saved!';
                _isLoadingsaved = false;
              });
              // Request failed with an error status code, print error message

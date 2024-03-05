@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/LoginPage.dart';
+import 'package:news_app/SignUpPage.dart';
 import 'package:news_app/Testing.dart';
 import 'package:news_app/app_router/scaffold_with_navbar.dart';
 import 'package:news_app/get_notification_screen.dart';
@@ -114,6 +116,15 @@ class MyApp extends StatelessWidget {
     GoRoute(
       path: '/get-notification',
       builder: (context, state) => const GetNotification(),
+    ),
+    GoRoute(
+      path: '/log-in',
+      builder: (context, state) => const LoginPage(),
+    ),
+    GoRoute(
+      path: '/sign-up',
+      builder: (context, state) => const SignUpPage(),
+
     ),
   ]);
 }

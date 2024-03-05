@@ -87,7 +87,7 @@ class GetNotification extends StatelessWidget {
                     ),
                     TextButton(
                         onPressed: () {
-                          GoRouter.of(context).go('/home');
+                          GoRouter.of(context).go('/sign-up');
                         },
                         style: TextButton.styleFrom(
                             backgroundColor: Colors.black87,
