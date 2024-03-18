@@ -1,16 +1,10 @@
 # news_app
 
-A new Flutter project.
+A Flutter project, a news app that also has the feature of saving news article you that you want to read later or for future reference.
 
-## Getting Started
+Flutter was used to build the cross platform mobile application and I used an external news api to fetch the news article using the http package.
 
-This project is a starting point for a Flutter application.
+And also I built a Restful Api Node.js backend connected to a Mongodb Database, for storing and retrieving the data.
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
